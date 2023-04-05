@@ -35,9 +35,8 @@ class HomeActivities:
           cur.execute(sql)
           # this will return a tuple
           # the first field being the data
-          #json = cur.fetchone()
-          rows = cur.fectchone()
-          
+          json = cur.fetchone()
+                    
       print("-1------")
       print(json())
         
