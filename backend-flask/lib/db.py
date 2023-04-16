@@ -9,7 +9,7 @@ class Db:
     connection_url = os.getenv("CONNECTION_URL")
     self.pool = ConnectionPool(connection_url)
   # we want to commit data such as an insert  
-  def query_commit(self,sql,*kwargs):
+  def query_commit(self,sql,prams):
     print("SQL STATEMENT [commit with returning]--------")
     print(sql = "\n")
     
@@ -24,7 +24,7 @@ class Db:
     try:
       conn = self.pool.connection()
       cur = conn.cursor()
-      cur.execute(sql,kwargs)
+      cur.execute(sql,prams)
       returning_id = cur.fetchone()[0]
       conn.commit()
       if is_returning_id:

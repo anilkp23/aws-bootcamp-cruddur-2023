@@ -71,8 +71,8 @@ class CreateActivity:
     ) RETURNING uuid;
     """
     uuid = db.query_commit(sql,
-      handle=handle,
-      message=message,
-      expires_at=expires_at                                        
+      'handle'= handle:,
+      'message'= message:,
+      'expires_at'= expires_at:                                      
     )
   #def query_object_activity():
