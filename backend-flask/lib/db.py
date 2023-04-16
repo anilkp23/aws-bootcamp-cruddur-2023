@@ -1,10 +1,6 @@
 from psycopg_pool import ConnectionPool
 import os
-
-
-    
-
-      
+   
 class Db:
   def __init__(self):
     self.init_pool()
@@ -13,15 +9,40 @@ class Db:
     connection_url = os.getenv("CONNECTION_URL")
     self.pool = ConnectionPool(connection_url)
   # we want to commit data such as an insert  
-  def query_commit(self):
+  def query_commit(self,sql,*kwargs):
+    print("SQL STATEMENT [commit with returning]--------")
+    print(sql = "\n")
+    
+    pattern = r"\bRETURNING\b"
+    match = re.search(pattern,my_string)
+    is_returning_id = re.search(pattern, my_string)
+    #if match:
+    #  print("found a match")
+    #else:
+    #  print("No match found")
+      
     try:
       conn = self.pool.connection()
       cur = conn.cursor()
-      cur.execute(sql)
+      cur.execute(sql,kwargs)
+      returning_id = cur.fetchone()[0]
       conn.commit()
+      if is_returning_id:
+        return returning_id
     except Exception as err:
       self.print_sql_err(err)
-      #conn.rollback()
+    def query_commit(self,sql):
+      print("SQL STATEMENT [array]-------")
+      try:
+        conn = self.pool.connection()
+        cur = conn.cursor()
+        cur.execute(sql)
+        returning_id = cur.fetchone()[0]
+        conn.commit()
+        return returning_id
+      except Exception as err:
+        self.print_sql_err(err)
+
   # when we want to return a json object
   def query_object_json(self,sql):
     print("SQL STATEMENT-[object]----------")
