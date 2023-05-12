@@ -11,3 +11,5 @@ aws-xray-sdk
 
 psycopg[binary]
 psycopg[pool]
+
+boto3
