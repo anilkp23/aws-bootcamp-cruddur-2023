@@ -16,7 +16,7 @@ ddb = boto3.client('dynamodb',**attrs)
 table_name = 'cruddur-message'
 
 response = ddb.create_table(
-    TableName='table_name',
+    TableName=table_name,
     AttributeDefinitions=[
         {
             'AttributeName': 'pk',
